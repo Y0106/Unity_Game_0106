@@ -31,6 +31,21 @@ namespace Yao
             Class_7_2_Static.Kick();
         }
 
+        public Class_7_2_Slime slimeGreen, slimeBlue;
+        private void Start()
+        {
+            // 非靜態成員
+            slimeGreen.hp -= 10;
+            Debug.Log($"<color=#3f>綠史萊姆 HP: {slimeGreen.hp}</color>");
+            slimeBlue.hp -= 10;
+            Debug.Log($"<color=#3f>藍史萊姆 HP: {slimeBlue.hp}</color>");
+
+            // 靜態成員
+            // 靜態成員無法透過個體存取
+            // slimeGreen.moveSpeed = 3.5f;(錯誤示範)
+            Class_7_2_Slime.moveSpeed = 3.5f;
+            Debug.Log($"<color=#3f3f3f>史萊姆移動速度: {Class_7_2_Slime.moveSpeed}</color>");
+        }
 
 
     }

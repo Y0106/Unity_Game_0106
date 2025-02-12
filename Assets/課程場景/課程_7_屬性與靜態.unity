@@ -357,7 +357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba6bcd75886b364eb67eb4d5833bae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  class_7_2: {fileID: 0}
+  class_7_2: {fileID: 1355572357}
+  slimeGreen: {fileID: 1786117338}
+  slimeBlue: {fileID: 502031030}
 --- !u!114 &1355572357
 MonoBehaviour:
   m_ObjectHideFlags: 0
