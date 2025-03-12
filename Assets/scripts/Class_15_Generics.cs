@@ -1,5 +1,7 @@
 ﻿using System;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Yao.Tools;
 
@@ -90,9 +92,27 @@ namespace Yao
             T temp = a;
             a = b;
             b = temp;
-        } 
+        }
         #endregion
+
+        private void Start()
+        {
+            var player = new Player();
+            var enemy=new Enemy();
+            var attackEvent = new AttackEvent<Player, Enemy>();
+            attackEvent.Attack(player, enemy);
+
+            var hp = new Hp();
+            var attack = new Attack();
+            hp.Increase(10.5f);
+            attack.Increase(50);
+            hp.Increase(3.75f);
+
+            var checker = new CheckValue<Hp, float>();
+            checker.Chack(hp);
+        }
     }
+    #region 泛型類別
     public class DataPlayer<T>
     {
         public T data;
@@ -100,7 +120,64 @@ namespace Yao
         {
             LogSystem.LogWithColor(data, "#9f9");
         }
-    
+
+    }
+    public class Player { }
+    public class Enemy { }
+
+    public class AttackEvent<T, U>
+    {
+        public void Attack(T attacker, U defender)
+        {
+            LogSystem.LogWithColor($"{attacker} 攻擊{defender}", "#9f9");
+        }
+
+    }
+    #endregion
+
+    #region 泛型介面
+    //泛型介面 
+    public interface IStat<T>
+    {
+        public T value { get; set; }  //該狀態的值
+        public void Increase(T amount);   //增加該狀態
+
+    }
+
+    public class Hp : IStat<float>
+    {
+        public float value { get; set; }
+
+        public void Increase(float amount)
+        {
+            value += amount;
+            LogSystem.LogWithColor($"血量{value}", "#f3f");
+        }
+    }
+   
+    public class Attack : IStat<int>
+    {
+        public int value { get; set; }
+        public void Increase(int amount)
+        {
+            value += amount;
+            LogSystem.LogWithColor($"攻擊力{value}", "#f3f");
+
+        }
+
+    }
+    #endregion
+
+    //泛型約束:泛型T必須實作IStat<T>介面
+    public class CheckValue<T, U> where T : IStat<U>
+    {
+        public void Chack(T stat)
+        {
+            //添加約束後可以使用
+            LogSystem.LogWithColor($"狀態的值:{stat.value}", "#3d3");
+
+
+        }
     }
 }
 
