@@ -30,7 +30,36 @@ namespace Yao.Class_17
             LogSystem.LogWithColor($"{card4.name} | " +
                 $"消耗：{card4.cost} | 編號：{card4.index}", "#f49");
 
-        }
+            UseCard(card1);
+            UseCard(card2);
+            ///UseCard(("暴龍"7,199));
 
+            var card1Update = UpdateCardCost(card1);
+            LogSystem.LogWithColor($"{card1Update.name} | " +
+                $"消耗: {card1Update.cost} | 编號: {card1Update.index}", "#f49");
+
+            LogSystem.LogWithColor($"{card1Update == card1}", "#79f");
+            LogSystem.LogWithColor($"{card1Update != card1}", "#79f");
+
+        }
+        /// <summary>
+        /// 使用卡牌
+        /// </summary>
+        private void UseCard((string name, int cost, int index) card)
+        { 
+        
+        }
+        /// <summary>
+        /// 降低卡牌消耗
+        /// </summary>
+        /// <param name="card">卡牌</param>
+        /// <returns>降低消耗的卡牌</returns>
+        
+        private (string name, int cost, int index) UpdateCardCost((string name, int cost, int index) card)
+        {
+            card.name = card.name + " 降低消耗版本";
+            card.cost -= 1;
+            return card;
+        }
     }
 }
